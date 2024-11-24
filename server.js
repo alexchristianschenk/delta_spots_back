@@ -14,6 +14,15 @@ app.use(express.json()); // Middleware para parsear JSON
 
 console.log("URI de MongoDB:", process.env.MONGODB_URI); // Confirmación de la URI
 
+
+
+// Permitir solicitudes solo desde tu frontend
+app.use(cors({
+    origin: 'https://delta-sports.onrender.com', // Reemplaza con la URL de tu frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
+
+
 // Conectar a MongoDB
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Conectado a MongoDB"))
