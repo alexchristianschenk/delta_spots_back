@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
 
 // Ruta para iniciar sesión
 router.post('/login', async (req, res) => {
-  const { nombre,edad, password } = req.body;
+  const { nombre, password } = req.body;
 
   try {
     const user = await User.findOne({ nombre });
