@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors'); // Importa cors después de express
+const session = require('express-session');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const turnosRouter = require('./routes/turnos');
