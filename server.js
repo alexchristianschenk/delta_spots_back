@@ -3,6 +3,7 @@ const cors = require('cors'); // Importa cors después de express
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const turnosRouter = require('./routes/turnos');
+const userRoutes = require('./routes/user')
 
 dotenv.config(); // Carga las variables de entorno al inicio
 
@@ -14,11 +15,17 @@ app.use(express.json()); // Middleware para parsear JSON
 
 console.log("URI de MongoDB:", process.env.MONGODB_URI); // Confirmación de la URI
 
-
+// Configuración de la sesión 
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true, 
+    cookie: { secure: false }
+  }));
 
 // Permitir solicitudes solo desde tu frontend
 app.use(cors({
-    origin: 'https://delta-sports.onrender.com', // Reemplaza con la URL de tu frontend
+    origin: 'https://delta-sports.onrender.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
@@ -30,9 +37,10 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Usar las rutas de turnos en /api/turnos
 app.use('/api/turnos', turnosRouter);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
-    res.send('Servidor de reserva de turnos funcionando');
+    res.send('Servidor de reserva de turnos y usuarios funcionando');
 });
 
 const PORT = process.env.PORT || 5000;
