@@ -67,6 +67,15 @@ router.get('/protegida', (req, res) => {
   }
 });
 
+// Obtener todos los usuarios activos (para probar si funciona el back)
+router.get('/', async (req, res) => {
+    try {
+      const users = await User.find(); 
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ mensaje: 'Error al obtener los usuarios', error });
+    }
+  });
 
 
 
