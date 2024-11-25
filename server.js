@@ -38,7 +38,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Usar las rutas de turnos en /api/turnos
 app.use('/api/turnos', turnosRouter);
-app.use('/api/usuarios', userRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
     res.send('Servidor de reserva de turnos y usuarios funcionando');
